@@ -1,6 +1,6 @@
 -- jena-sdb storage for postgres: layout1
 
-drop table if exists Prefixes;
+DROP TABLE IF EXISTS Prefixes;
 CREATE TABLE Prefixes (
 	prefix VARCHAR(50) NOT NULL,
 	uri VARCHAR(500) NOT null,
@@ -17,7 +17,7 @@ INSERT INTO Prefixes VALUES ('foaf',    'http://xmlns.com/foaf/0.1/');
 INSERT INTO Prefixes VALUES ('dc',      'http://purl.org/dc/elements/1.1/');
 INSERT INTO Prefixes VALUES ('dcterms', 'http://purl.org/dc/terms/');
 
-drop table if exists Triples;
+DROP TABLE IF EXISTS Triples;
 CREATE TABLE Triples (
 	s VARCHAR(500) NOT NULL,
 	p VARCHAR(500) NOT NULL,

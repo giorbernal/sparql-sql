@@ -22,7 +22,7 @@ Get into your postgres instance (local, by docker or whatever, or remote) and cr
 > CREATE USER fuseki
 > CREATE DATABASE sdb2
 > GRANT CONNECT ON DATABASE sdb2 TO fuseki;
-> GRANT ALL PRIVILEGES ON DATABASE sdb TO fuseki;
+> GRANT ALL PRIVILEGES ON DATABASE sdb2 TO fuseki;
 ```
 
 Then, get into your just-created database with the just-created user and create the schema for the backend ([layout1](sql/layout1.sql) or [layout2/hash](sql/layout2_hash.sql)):
@@ -61,4 +61,4 @@ Finally you could execute SPARQL queries with this utility:
 > utils/query.sh "select * {?s ?p ?o}"
 ```
 
-You can check[apache-jana-fuseki](https://jena.apache.org/documentation/fuseki2/) documention for further information.
+You can check [apache-jana-fuseki](https://jena.apache.org/documentation/fuseki2/) documention for further information.

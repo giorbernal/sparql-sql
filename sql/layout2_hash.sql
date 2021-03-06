@@ -1,13 +1,13 @@
--- jena-sdb storage for postgres: layout1
+-- jena-sdb storage for postgres: layout2/hash
 
-drop table if exists Prefixes;
+DROP TABLE IF EXISTS Prefixes;
 CREATE TABLE Prefixes (
 	prefix VARCHAR(50) NOT NULL,
 	uri VARCHAR(500) NOT null,
 	PRIMARY KEY(prefix)
 );
 
-drop table if exists Triples;
+DROP TABLE IF EXISTS Triples;
 CREATE TABLE Triples (
 	s BIGINT NOT NULL,
 	p BIGINT NOT NULL,
@@ -15,10 +15,7 @@ CREATE TABLE Triples (
 	PRIMARY KEY (s, p, o)
 );
 
-DROP INDEX IF EXISTS PredObj;
-DROP INDEX IF EXISTS ObjSubj;
-
-drop table if exists quads;
+DROP TABLE IF EXISTS quads;
 CREATE TABLE Quads (
 	g BIGINT NOT NULL,
 	s BIGINT NOT NULL,
@@ -27,7 +24,7 @@ CREATE TABLE Quads (
 	PRIMARY KEY (g, s, p, o)
 );
 
-drop table if exists nodes;
+DROP TABLE IF EXISTS nodes;
 CREATE TABLE Nodes (
 	hash BIGINT NOT NULL,
 	lex TEXT NOT NULL,
