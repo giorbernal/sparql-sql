@@ -1,0 +1,69 @@
+## Licensed under the terms of http://www.apache.org/licenses/LICENSE-2.0
+
+PREFIX :        <#>
+PREFIX fuseki:  <http://jena.apache.org/fuseki#>
+PREFIX rdf:     <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs:    <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX ja:      <http://jena.hpl.hp.com/2005/11/Assembler#>
+PREFIX sdb:     <http://jena.hpl.hp.com/2007/sdb#>
+
+[] rdf:type fuseki:Server ;
+   fuseki:services (
+     :service
+   ) .
+
+[] ja:loadClass "org.apache.jena.sdb.SDB" .
+#sdb:DatasetStore  rdfs:subClassOf  ja:RDFDataset .
+
+## Service description for "/dataset"
+## with a TDB1 dataset
+
+:service rdf:type fuseki:Service ;
+    fuseki:name "dataset" ;
+    fuseki:endpoint [ 
+        fuseki:operation fuseki:query ;
+        fuseki:name "sparql" 
+    ];
+    fuseki:endpoint [
+        fuseki:operation fuseki:query ;
+        fuseki:name "query" 
+    ] ;
+    fuseki:endpoint [
+        fuseki:operation fuseki:update ;
+        fuseki:name "update"
+    ] ;
+    fuseki:endpoint [
+        fuseki:operation fuseki:gsp-r ;
+        fuseki:name "get"
+    ] ;
+    fuseki:endpoint [ 
+        fuseki:operation fuseki:gsp-rw ; 
+        fuseki:name "data"
+    ] ; 
+    fuseki:endpoint [ 
+        fuseki:operation fuseki:upload ;
+        fuseki:name "upload"
+    ] ; 
+    fuseki:dataset :dataset ;
+    .
+
+:dataset rdf:type sdb:DatasetStore ;
+    sdb:store :store ;
+    .
+
+:store rdf:type sdb:Store ;
+    ## sdb:layout "layout2/hash" ;
+    sdb:layout "layout1" ;
+    sdb:connection :conn ;
+    .
+
+:conn rdf:type sdb:SDBConnection ;
+    sdb:sdbType        "derby" ; ## Only used to database creation. Not required to load ontologies or query info where jdbURL points
+    sdb:jdbcURL "JDBC_URL" ;
+    ## sdb:sdbHost        "localhost" ;
+    ## sdb:sdbName        "sdb2" ;
+    ## sdb:sdbUser        "fuseki" ;
+    sdb:driver         "org.postgresql.Driver" ;
+    .
+
+
