@@ -53,7 +53,7 @@ PREFIX sdb:     <http://jena.hpl.hp.com/2007/sdb#>
 
 :store rdf:type sdb:Store ;
     ## sdb:layout "layout2/hash" ;
-    sdb:layout "layout1" ;
+    sdb:layout "LAYOUT" ;
     sdb:connection :conn ;
     .
 
@@ -63,7 +63,7 @@ PREFIX sdb:     <http://jena.hpl.hp.com/2007/sdb#>
     ## sdb:sdbHost        "localhost" ;
     ## sdb:sdbName        "sdb2" ;
     ## sdb:sdbUser        "fuseki" ;
-    sdb:driver         "org.postgresql.Driver" ;
+    sdb:driver         "DRIVER_CLASS" ;
     .
 
 

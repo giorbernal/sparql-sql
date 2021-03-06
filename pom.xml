@@ -11,6 +11,10 @@
     <properties>
         <apache-jena.version>3.17.0</apache-jena.version>
         <posgresql-driver.version>42.2.19</posgresql-driver.version>
+
+        <!-- Plugin versions -->
+        <dependency-plugin.version>2.1</dependency-plugin.version>
+        <exec-plugin.version>1.1.1</exec-plugin.version>
     </properties>
 
     <build>
@@ -18,7 +22,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-dependency-plugin</artifactId>
-                <version>2.1</version>
+                <version>${dependency-plugin.version}</version>
                 <executions>
                     <execution>
                         <id>copy-dependencies</id>
@@ -31,6 +35,23 @@
                             <overWriteReleases>false</overWriteReleases>
                             <overWriteSnapshots>false</overWriteSnapshots>
                             <overWriteIfNewer>true</overWriteIfNewer>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <artifactId>exec-maven-plugin</artifactId>
+                <groupId>org.codehaus.mojo</groupId>
+                <version>${exec-plugin.version}</version>
+                <executions>
+                    <execution><!-- Run our version calculation script -->
+                        <id>Docker build</id>
+                        <phase>install</phase>
+                        <goals>
+                            <goal>exec</goal>
+                        </goals>
+                        <configuration>
+                            <executable>${basedir}/build.sh</executable>
                         </configuration>
                     </execution>
                 </executions>
